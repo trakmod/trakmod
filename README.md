@@ -1,5 +1,5 @@
 # Element
-The only element required for your discord bot.
+Your Discord Element for Python.
 
 # Installing
 Currently, element is in a beta phase and won't be published on pypi yet.
@@ -9,11 +9,11 @@ Although you can still download us using the following(NOTE: you need to have gi
 
 poetry(recommended):
 ```
-poetry add git+https://github.com/tryelement/element
+poetry add git+https://github.com/elementbuild/element
 ```
 
 pip:
 ```
-pip install git+https://github.com/tryelement/element
+pip install git+https://github.com/elementbuild/element
 ```
 
