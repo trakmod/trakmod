@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Element and Contributors.
+# Copyright (c) 2021-2022 VincentRPS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,20 +18,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import importlib.resources
 import logging
 import os
-import string
 import sys
-import warnings
-from typing import Any, Union
+from typing import Union
 
 import colorlog
 import colorlog.escape_codes
+from disbase._info import __version__
 
-from element import __author__, __license__, __version__
-
-COLORLOG_FORMAT = '%(log_color)s%(bold)s%(levelname)s|%(asctime)s|%(name)s: %(thin)s%(message)s%(reset)s'
+COLORLOG_FORMAT = '%(log_color)s%(bold)s%(levelname)s | %(asctime)s | %(name)s: %(thin)s%(message)s%(reset)s'
 UNCOLORED_FORMAT = '%(levelname)s $(asctime)s %(name)s: %(message)s'
 
 
@@ -42,9 +38,7 @@ def color_is_supported() -> bool:
         return is_a_tty
 
     return is_a_tty and (
-        'ANSICON' in os.environ
-        or 'WT_SESSION' in os.environ
-        or os.environ.get('TERM_PROGRAM') == 'vscode'
+        'ANSICON' in os.environ or 'WT_SESSION' in os.environ or os.environ.get('TERM_PROGRAM') == 'vscode'
     )
 
 
@@ -54,31 +48,9 @@ def start_logging(level: Union[None, str, int]):
     else:
         logging.basicConfig(level=level, format=UNCOLORED_FORMAT, stream=sys.stderr)
 
-    # enable warnings
-    warnings.simplefilter("always", DeprecationWarning)
-    logging.captureWarnings(True)
-
-
-def print_default_element(pkg: str = 'element'):
-    # only print banner if color is supported.
-    if color_is_supported():
-        args = {
-            'version': __version__,
-            'author': __author__,
-            'license': __license__,
-            'github': 'github.com/tryelement/element',
-            'server': 'discord.gg/H3jY8snYXN',
-        }
-        args.update(colorlog.escape_codes.escape_codes)
-
-        text = importlib.resources.read_text(pkg, 'banner.element', encoding='utf-8')
-        with open(
-            sys.stdout.fileno(), 'w', encoding='utf-8', closefd=False
-        ) as terminal:
-            terminal.write(string.Template(text).safe_substitute(args))
+    logging.info(f'Welcome to Disbase v{__version__}')
 
 
 if __name__ == '__main__':
-    print_default_element()
     start_logging(logging.DEBUG)
     logging.critical('g')

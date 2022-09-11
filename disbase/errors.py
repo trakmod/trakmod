@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Element and Contributors.
+# Copyright (c) 2021-2022 VincentRPS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -19,29 +19,29 @@
 # SOFTWARE.
 
 
-import asyncio
+class DisbaseException(Exception):
+    ...
 
 
-class Block:
-    """
-    This class tempoarily blocks requests after hitting a ratelimit
-    """
+class GatewayException(Exception):
+    ...
 
-    def __init__(self, path: str):
-        self._event: asyncio.Event = None
-        self.path = path
 
-    async def wait(self):
-        await self._event.wait()
+class GuildException(DisbaseException):
+    ...
 
-    async def block(self, reset_after: int, bucket: str):
-        self.bucket_denom = bucket
 
-        self._event = asyncio.Event()
+class HTTPException(DisbaseException):
+    ...
 
-        await asyncio.sleep(reset_after)
 
-        self.end()
+class NotFound(HTTPException):
+    ...
 
-    def end(self):
-        self._event.set()
+
+class Forbidden(HTTPException):
+    ...
+
+
+class Unauthorized(HTTPException):
+    ...

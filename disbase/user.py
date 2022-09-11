@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Element and Contributors.
+# Copyright (c) 2021-2022 VincentRPS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -19,15 +19,46 @@
 # SOFTWARE.
 
 from datetime import datetime
+from typing import Protocol
 
 from discord_typings.resources import UserData
 
-from element.state import ConnectionState
-from element.utils import _convert_base64_from_bytes, grab_creation_time
+from disbase.mixins import Hashable
+from disbase.state import BaseConnectionState
+from disbase.utils import _convert_base64_from_bytes, grab_creation_time
 
 
-class User:
-    def __init__(self, data: UserData, state: ConnectionState) -> None:
+class BaseUser(Protocol):
+    as_dict: UserData
+    _state: BaseConnectionState
+
+    id: int
+    email: str | None
+    username: str
+    flags: int | None
+    public_flags: int | None
+    locale: str | None
+    accent_color: int | None
+    banner: str | None
+    avatar: str | None
+    discriminator: str
+    premium_type: int | None
+    system: bool | None
+    mfa_enabled: bool | None
+    verified: bool | None
+    bot: bool | None
+
+    def __init__(self, data: UserData, state: BaseConnectionState) -> None:
+        pass
+
+
+class BaseCurrentUser(BaseUser):
+    async def edit(self, username: str | None = None, avatar: bytes | None = None) -> None:
+        pass
+
+
+class User(BaseUser, Hashable):
+    def __init__(self, data: UserData, state: BaseConnectionState) -> None:
         self.as_dict = data
         self._state = state
 
@@ -53,20 +84,18 @@ class User:
 
     @property
     def created_at(self) -> datetime:
-        return grab_creation_time(self.id)
+        return grab_creation_time(self.id)  # type: ignore
 
 
-class CurrentUser(User):
-    async def edit(
-        self, username: str | None = None, avatar: bytes | None = None
-    ) -> None:
+class CurrentUser(User, BaseCurrentUser):
+    async def edit(self, username: str | None = None, avatar: bytes | None = None) -> None:
         if not username and not avatar:
             return
 
         if avatar:
-            avatar = _convert_base64_from_bytes(avatar)
+            avatar = _convert_base64_from_bytes(avatar)  # type: ignore
 
-        edited = await self._state._app.http.edit_me(username=username, avatar=avatar)
+        edited = await self._state._app.http.edit_me(username=username, avatar=avatar)  # type: ignore
 
         self.username = edited['username']
         self.avatar = edited['avatar']

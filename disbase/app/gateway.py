@@ -1,4 +1,4 @@
-# Copyright (c) 2022 Element and Contributors.
+# Copyright (c) 2021-2022 VincentRPS
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -17,43 +17,36 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 import asyncio
 import logging
 
-from element.internal import HTTPClient, print_default_element, start_logging
-from element.state import ConnectionState
-from element.user import CurrentUser
+from disbase.app.rest import RESTApp
+from disbase.internal.gateway import ShardManager
 
 
-class RESTApp:
+class GatewayApp(RESTApp):
     def __init__(
-        self,
-        token: str,
-        intents: int,
-        *,
-        version: int = 10,
-        level: int = logging.INFO,
-        cache_timeout: int = 25000
+        self, intents: int, *, shards: int = 1, version: int = 10, level: int = logging.INFO, cache_timeout: int = 10000
     ) -> None:
-        self.token = token
         self.intents = intents
-        self.cache_timeout = cache_timeout
-        self._version = version
-        self._level = level
-        self._package = 'element'
+        self.shards = shards
+        super().__init__(version=version, level=level, cache_timeout=cache_timeout)
 
-    def run(self):
-        asyncio.run(self.start())
+    def connect(self, token: str):
+        async def _conn():
+            await self.start(token=token)
+            self._state.gateway_enabled = True
 
-    async def start(self):
-        print_default_element(pkg=self._package)
-        start_logging(level=self._level)
-        self._state = ConnectionState(self, cache_timeout=self.cache_timeout)
-        await self._state.start_cache()
+            self.shard_manager = ShardManager(self.shards, self._state, self.dispatcher, self._version)
+            # .run/.start already sets token to a non-None type.
+            await self.shard_manager.connect(self.token)  # type: ignore
 
-        http = HTTPClient(self.token, self._version)
-        self.http = http
-        self.user = CurrentUser(await http.get_me(), self._state)
+        # TODO: Replace with asyncio.run
+        loop = asyncio.new_event_loop()
+        loop.run_until_complete(_conn())
+        loop.run_forever()
 
-    async def edit(self, username: str | None = None, avatar: bytes | None = None):
-        return await self.user.edit(username=username, avatar=avatar)
+    async def close(self):
+        await super().close()
+        await self.shard_manager.disconnect()

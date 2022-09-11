@@ -1,1 +1,4 @@
 .mypy_cache
+tests-dev
+__pycache__
+.idea*

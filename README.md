@@ -1,19 +1,15 @@
-# Element
-Your Discord Element for Python.
+# Disbase
+Disbase is a library for easily building advanced Discord bots in Python in a scalable fashion.
 
-# Installing
-Currently, element is in a beta phase and won't be published on pypi yet.
-Although you can still download us using the following(NOTE: you need to have git installed to use this.):
+# Installation
+Disbase is currently not available on pypi due to it being in a temporal unstable 0.1.0 beta.
+Once we stablize 0.1.0 to be happy to launch it to pypi, it will be brought there.
 
-## Development
+## GitHub
+You can install disbase using our github link & git.
 
-poetry(recommended):
+For this install, you will need to have [git](https://git-scm.com) installed.
+
+```sh
+pip install git+ssh://git@github.com/disbase/disbase.git
 ```
-poetry add git+https://github.com/elementbuild/element
-```
-
-pip:
-```
-pip install git+https://github.com/elementbuild/element
-```
-
