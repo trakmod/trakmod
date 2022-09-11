@@ -21,5 +21,5 @@
 # NOTE: This is here to avoid errors with imports
 __title__: str = 'Disbase'
 __author__: str = 'VincentRPS @ Disbase'
-__version__: str = '3.0.0'
+__version__: str = '0.1.0'
 __license__: str = 'MIT'
