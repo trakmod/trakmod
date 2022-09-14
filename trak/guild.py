@@ -18,7 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from queue import Empty
 from typing import Protocol
 
 from discord_typings import EmojiData, GuildData, RoleData, RoleTagsData, Snowflake
@@ -27,7 +26,7 @@ from trak.errors import GuildException
 from trak.mixins import Hashable
 from trak.state import BaseConnectionState
 from trak.user import BaseUser
-from trak.utils import EMPTY, Empty as UEmpty
+from trak.utils import UndefinedType as UEmpty
 
 
 def _transform_into_roles(state: BaseConnectionState, roles: list[RoleData] | None = None) -> list["Role"] | None:

@@ -47,7 +47,7 @@ class Models(TypedDict):
 
 
 class BaseRESTApp:
-    self.token: str | None
+    token: str | None
     cache_timeout: int
     _version: int
     _level: int

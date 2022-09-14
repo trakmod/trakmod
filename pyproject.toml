@@ -5,6 +5,56 @@ description = ""
 authors = ["VincentRPS <vincentbusiness55@gmail.com>"]
 license = "MIT"
 
+[tool.towncrier]
+template = "changelog/_template.rst.jinja"
+package = "trak._info"
+directory = "changelog"
+title_format = "v{version}"
+underlines = "-~"
+issue_format = ":issue:`{issue}`"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecate"
+name = "Deprecations"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "feature"
+name = "New Features"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "bugfix"
+name = "Bug Fixes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "doc"
+name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "misc"
+name = "Miscellaneous"
+showcontent = true
+
+[tool.black]
+target-version = ["py310"]
+skip-string-normalization = true
+line-length = 120
+
+[tool.isort]
+profile = 'black'
+
+[tool.pyright]
+strict = true
+exclude = [ "**/__pycache__", "**/tests-dev" ]
+
 [tool.poetry.dependencies]
 python = "^3.10"
 aiohttp = {version = "^3.8.1"}
@@ -23,6 +73,7 @@ types-orjson = "^3.6.2"
 flake8 = "^5.0.4"
 flake8-functions = "^0.0.7"
 flake8-if-statements = "^0.1.0"
+towncrier = "^22.8.0"
 
 [tool.poetry.extras]
 boost = [ "uvloop", "cchardet", "aiodns", "Brotli" ]
@@ -30,15 +81,3 @@ boost = [ "uvloop", "cchardet", "aiodns", "Brotli" ]
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-target-version = ["py310"]
-skip-string-normalization = true
-line-length = 120
-
-[tool.isort]
-profile = 'black'
-
-[tool.pyright]
-strict = true
-exclude = [ "**/__pycache__", "**/tests-dev" ]
