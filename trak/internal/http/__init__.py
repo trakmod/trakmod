@@ -1,7 +1,7 @@
 """
-disbase.internal.http
+trakmod.internal.http
 ~~~~~~~~~~~~~~~~~~~~~
-Disbase's Internal HTTP Routes.
+Trakmod's Internal HTTP Routes.
 
 :copyright: 2021-2022 VincentRPS
 :license: MIT, see LICENSE for more details.
@@ -13,14 +13,14 @@ from typing import Any
 from aiohttp import ClientSession, FormData
 from discord_typings.resources.user import UserData
 
-from disbase._info import __version__
-from disbase import utils
-from disbase.errors import Forbidden, HTTPException, NotFound, Unauthorized
-from disbase.file import File
-from disbase.internal.blocks import Block
-from disbase.internal.http.emoji import EmojiRoutes
-from disbase.internal.http.guild import GuildRoutes
-from disbase.internal.http.route import Route
+from trak._info import __version__
+from trak import utils
+from trak.errors import Forbidden, HTTPException, NotFound, Unauthorized
+from trak.file import File
+from trak.internal.blocks import Block
+from trak.internal.http.emoji import EmojiRoutes
+from trak.internal.http.guild import GuildRoutes
+from trak.internal.http.route import Route
 
 _log: logging.Logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ _log: logging.Logger = logging.getLogger(__name__)
 class HTTPClient(EmojiRoutes, GuildRoutes):
     def __init__(self, token: str, version: int, max_retries: int = 5):
         self._session: ClientSession | None = None
-        self._headers: dict[str, str] = {'Authorization': f'Bot {token}', 'User-Agent': f'DiscordBot (https://github.com/disbase/disbase, {__version__})'}
+        self._headers: dict[str, str] = {'Authorization': f'Bot {token}', 'User-Agent': f'DiscordBot (https://github.com/trakmod/trakmod, {__version__})'}
 
         self.version = version
         self._blockers: dict[str, Block] = {}

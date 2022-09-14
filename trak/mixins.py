@@ -27,9 +27,9 @@ from aiohttp import ClientSession
 from discord_typings import Snowflake
 
 if TYPE_CHECKING:
-    from disbase.file import File
-    from disbase.internal.http.route import Route
-    from disbase.state import BaseConnectionState
+    from trak.file import File
+    from trak.internal.http.route import Route
+    from trak.state import BaseConnectionState
 
 
 class Comparable:

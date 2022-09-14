@@ -19,7 +19,7 @@
 # SOFTWARE.
 import asyncio
 
-from disbase.state import BaseConnectionState
+from trak.state import BaseConnectionState
 
 from ..events import EventDispatcher
 from .shard import Shard

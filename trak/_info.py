@@ -18,35 +18,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import asyncio
-import logging
-
-from disbase.app.rest import RESTApp
-from disbase.internal.gateway import ShardManager
-
-
-class GatewayApp(RESTApp):
-    def __init__(
-        self, intents: int, *, shards: int = 1, version: int = 10, level: int = logging.INFO, cache_timeout: int = 10000
-    ) -> None:
-        self.intents = intents
-        self.shards = shards
-        super().__init__(version=version, level=level, cache_timeout=cache_timeout)
-
-    def connect(self, token: str):
-        async def _conn():
-            await self.start(token=token)
-            self._state.gateway_enabled = True
-
-            self.shard_manager = ShardManager(self.shards, self._state, self.dispatcher, self._version)
-            # .run/.start already sets token to a non-None type.
-            await self.shard_manager.connect(self.token)  # type: ignore
-
-        # TODO: Replace with asyncio.run
-        loop = asyncio.new_event_loop()
-        loop.run_until_complete(_conn())
-        loop.run_forever()
-
-    async def close(self):
-        await super().close()
-        await self.shard_manager.disconnect()
+# NOTE: This is here to avoid errors with imports
+__title__: str = 'Trakmod'
+__author__: str = 'VincentRPS @ Trakmod'
+__version__: str = '0.1.0'
+__license__: str = 'MIT'

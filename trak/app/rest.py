@@ -22,11 +22,11 @@ import asyncio
 import logging
 from typing import Any, Callable, Coroutine, Type, TypedDict
 
-from disbase.guild import BaseEmoji, BaseGuild, BaseRole, Emoji, Guild, Role
-from disbase.internal import EventDispatcher, HTTPClient, start_logging
-from disbase.internal.events import BaseEventDispatcher
-from disbase.state import BaseConnectionState, ConnectionState
-from disbase.user import BaseCurrentUser, BaseUser, CurrentUser, User
+from trak.guild import BaseEmoji, BaseGuild, BaseRole, Emoji, Guild, Role
+from trak.internal import EventDispatcher, HTTPClient, start_logging
+from trak.internal.events import BaseEventDispatcher
+from trak.state import BaseConnectionState, ConnectionState
+from trak.user import BaseCurrentUser, BaseUser, CurrentUser, User
 
 
 def find_loop():

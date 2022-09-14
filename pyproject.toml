@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "disbase"
+name = "trakmod"
 version = "0.1.0"
 description = ""
 authors = ["VincentRPS <vincentbusiness55@gmail.com>"]

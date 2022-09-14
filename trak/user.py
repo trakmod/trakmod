@@ -23,9 +23,9 @@ from typing import Protocol
 
 from discord_typings.resources import UserData
 
-from disbase.mixins import Hashable
-from disbase.state import BaseConnectionState
-from disbase.utils import _convert_base64_from_bytes, grab_creation_time
+from trak.mixins import Hashable
+from trak.state import BaseConnectionState
+from trak.utils import _convert_base64_from_bytes, grab_creation_time
 
 
 class BaseUser(Protocol):

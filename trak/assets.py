@@ -20,9 +20,9 @@
 
 import re
 
-from disbase.mixins import AssetMixin, BaseAssetMixin
-from disbase.state import BaseConnectionState
-from disbase.utils import _validate_image_params
+from trak.mixins import AssetMixin, BaseAssetMixin
+from trak.state import BaseConnectionState
+from trak.utils import _validate_image_params
 
 __all__ = ('Asset',)
 

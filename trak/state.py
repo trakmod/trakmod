@@ -22,9 +22,9 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Mapping, Protocol, Type, TypeVar, Union
 
 if TYPE_CHECKING:
-    from disbase.guild import Guild
-    from disbase.app.gateway import GatewayApp
-    from disbase.app.rest import RESTApp
+    from trak.guild import Guild
+    from trak.app.gateway import GatewayApp
+    from trak.app.rest import RESTApp
 
     # TODO: add other classes like message, channel, and member.
     T = TypeVar('T', Guild)

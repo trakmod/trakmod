@@ -1,5 +1,5 @@
 """
-disbase.internal.gateway
+trakmod.internal.gateway
 ~~~~~~~~~~~~~~~~~~~~~~~~
 Implementation of the Discord Gateway.
 

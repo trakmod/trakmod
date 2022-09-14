@@ -25,7 +25,7 @@ from typing import Union
 
 import colorlog
 import colorlog.escape_codes
-from disbase._info import __version__
+from trak._info import __version__
 
 COLORLOG_FORMAT = '%(log_color)s%(bold)s%(levelname)s | %(asctime)s | %(name)s: %(thin)s%(message)s%(reset)s'
 UNCOLORED_FORMAT = '%(levelname)s $(asctime)s %(name)s: %(message)s'
@@ -48,7 +48,7 @@ def start_logging(level: Union[None, str, int]):
     else:
         logging.basicConfig(level=level, format=UNCOLORED_FORMAT, stream=sys.stderr)
 
-    logging.info(f'Welcome to Disbase v{__version__}')
+    logging.info(f'Welcome to Trakmod v{__version__}')
 
 
 if __name__ == '__main__':

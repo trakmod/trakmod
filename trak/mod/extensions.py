@@ -19,7 +19,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 """
-disbase.mod.extensions
+trakmod.mod.extensions
 ~~~~~~~~~~~~~~~~~~~~~~
 Extensions which allow you to extend your bot across multiple files.
 
@@ -30,7 +30,7 @@ Extensions which allow you to extend your bot across multiple files.
 from typing import TYPE_CHECKING, Any, Callable, Coroutine
 
 if TYPE_CHECKING:
-    from disbase.app import app as appt
+    from trak.app import app as appt
 
 
 class Extension:

@@ -27,7 +27,7 @@ from typing import TYPE_CHECKING, Any
 from aiohttp import WSMsgType
 from discord_typings.gateway import GatewayEvent
 
-from disbase import utils
+from trak import utils
 
 from ...errors import GatewayException
 from ...state import BaseConnectionState
@@ -230,8 +230,8 @@ class Shard:
                     'intents': self._state._app.intents,  # type: ignore
                     'properties': {
                         'os': platform.system(),
-                        'browser': 'disbase',
-                        'device': 'disbase',
+                        'browser': 'trak3',
+                        'device': 'trak3',
                     },
                     'shard': (self.id, self.shard_count),
                     'compress': True,

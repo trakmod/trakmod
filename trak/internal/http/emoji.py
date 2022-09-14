@@ -19,8 +19,8 @@
 # SOFTWARE.
 from discord_typings import EmojiData, Snowflake
 
-from disbase.internal.http.route import Route
-from disbase.mixins import RouteCategoryMixin
+from trak.internal.http.route import Route
+from trak.mixins import RouteCategoryMixin
 
 
 class EmojiRoutes(RouteCategoryMixin):

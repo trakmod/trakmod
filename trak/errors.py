@@ -19,7 +19,7 @@
 # SOFTWARE.
 
 
-class DisbaseException(Exception):
+class TrakmodException(Exception):
     ...
 
 
@@ -27,11 +27,11 @@ class GatewayException(Exception):
     ...
 
 
-class GuildException(DisbaseException):
+class GuildException(TrakmodException):
     ...
 
 
-class HTTPException(DisbaseException):
+class HTTPException(TrakmodException):
     ...
 
 

@@ -40,9 +40,9 @@ from discord_typings import (
     WelcomeScreenData,
 )
 
-from disbase.internal.http.route import Route
-from disbase.mixins import RouteCategoryMixin
-from disbase.types import ModifyMFALevelData, PrunedData
+from trak.internal.http.route import Route
+from trak.mixins import RouteCategoryMixin
+from trak.types import ModifyMFALevelData, PrunedData
 
 
 class GuildRoutes(RouteCategoryMixin):
